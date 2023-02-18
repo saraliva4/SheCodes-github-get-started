@@ -1,0 +1,111 @@
+body {
+  font-family: sans-serif;
+  background: #fff;
+}
+div.search {
+  text-align: center;
+  padding: 20px 10px;
+}
+.search.search-icon {
+  color: #128494;
+}
+.search.search-bar {
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: 0.5px solid #128494;
+}
+.search.current-location-button {
+  color: #fff;
+  border-radius: 4px;
+  transition: all 200ms ease-in-out;
+  padding: 5px 10px;
+  box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.2);
+  border: 1px solid #128494;
+  background-color: #00b7c2;
+}
+.search.current-location-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+.card {
+  display: block;
+  margin: 0px auto;
+  padding: 20px 15px 30px;
+  border: 1px solid #128494;
+}
+.card.sunday {
+  margin-bottom: 20px;
+}
+h1.currently,
+h5.next-week,
+h6.currently,
+h6.next-week {
+  text-align: center;
+}
+h4.currently {
+  font-size: 20px;
+  padding-top: 10px;
+  font-weight: 400;
+}
+.card-subtitle {
+  font-size: 15px;
+  color: #128494 !important;
+}
+.card.next-week {
+  padding: 10px 0 0;
+}
+.current-degrees-emoji {
+  font-size: 50px;
+}
+.current-degrees {
+  position: relative;
+  top: -10px;
+  font-size: 40px;
+  font-weight: 400;
+}
+.celsius-fahrenheit {
+  font-size: 13px;
+  position: relative;
+  bottom: 30px;
+  color: #128494;
+}
+a.degree-unit {
+  text-decoration: none;
+  color: black;
+}
+a.degree-unit:hover {
+  text-decoration: underline;
+  text-decoration-color: #00b7c2;
+  color: #00b7c2;
+  cursor: pointer;
+}
+ul.currently {
+  list-style: none;
+  border-left: 2px solid #00b7c2;
+  position: relative;
+  left: -8px;
+  font-size: smaller;
+  padding: 30px 10px 30px 50px;
+}
+.currently.today-hours {
+  font-weight: 200;
+}
+.next-week.weather {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 200;
+  position: relative;
+  top: -25px;
+}
+.next-week.temperature {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 200;
+}
+.next-week.weather-emoji {
+  font-size: 50px;
+}
+.next-week.weather-forecast {
+  position: relative;
+  top: -10px;
+}
