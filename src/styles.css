@@ -109,3 +109,8 @@ ul.currently {
   position: relative;
   top: -10px;
 }
+.open-source-code {
+  text-align: center;
+  font-size: 12px;
+  padding-bottom: 30px;
+}
