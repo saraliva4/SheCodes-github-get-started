@@ -81,9 +81,9 @@ h4.description {
 .weather-icon {
   width: 80px;
   position: relative;
-  bottom: 5px;
+  bottom: 8px;
 }
-.celsius-fahrenheit {
+.temperature-unit {
   font-size: 11px;
   position: relative;
   bottom: 18px;
@@ -91,16 +91,25 @@ h4.description {
   color: #128494;
   margin: 0%;
 }
-a.temperature-unit {
+.inactive {
+  color: #00b7c2;
+  cursor: default;
+  text-decoration: none;
+}
+.inactive:hover {
+  text-decoration: underline;
+  text-decoration-color: #00b7c2;
+}
+
+.active {
   text-decoration: none;
   color: black;
 }
-a.temperature-unit:hover {
-  text-decoration: underline;
-  text-decoration-color: #00b7c2;
-  color: #00b7c2;
-  cursor: pointer;
+.active:hover {
+  text-decoration: none;
+  cursor: default;
 }
+
 ul.currently {
   list-style: none;
   border-left: 2px solid #00b7c2;

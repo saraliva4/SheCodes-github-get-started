@@ -50,6 +50,8 @@ function showTemperature(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", `response.data.weather[0].description`);
+
+  celsiusTemperature = response.data.main.temp;
 }
 
 function searchLocation(city) {
@@ -65,8 +67,6 @@ function handleSubmit(event) {
   let searchInput = document.querySelector("#search-input");
   searchLocation(searchInput.value);
 }
-
-searchLocation("longyearbyen");
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
@@ -88,20 +88,34 @@ function getCurrentLocation(event) {
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-//****
-
-let temperatureElement = document.querySelector(".current-temperature");
-
 function temperatureCelsius(event) {
   event.preventDefault();
-  currentDegrees.innerHTML = 3;
+  let temperatureElement = document.querySelector(".current-temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  fahrenheit.classList.remove("active");
+  fahrenheit.classList.add("inactive");
+  celsius.classList.remove("inactive");
+  celsius.classList.add("active");
 }
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", temperatureCelsius);
 
 function temperatureFahrenheit(event) {
   event.preventDefault();
-  currentDegrees.innerHTML = 37;
+  let temperatureElement = document.querySelector(".current-temperature");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+
+  fahrenheit.classList.remove("inactive");
+  fahrenheit.classList.add("active");
+  celsius.classList.remove("active");
+  celsius.classList.add("inactive");
 }
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", temperatureCelsius);
+
 let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", temperatureFahrenheit);
+
+let celsiusTemperature = null;
+
+searchLocation("longyearbyen");
