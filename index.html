@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <title>Weather by Sara</title>
     <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script
       src="https://kit.fontawesome.com/b1acacfe0a.js"
       crossorigin="anonymous"
@@ -30,15 +30,13 @@
             <i class="fa-solid fa-magnifying-glass search-icon search"></i>
           </span>
           <input
-            class="search search-bar"
+            class="search search-input"
             type="text"
             id="search-input"
-            placeholder="Search"
+            placeholder="Type a city..."
           />
-          <button
-            class="search current-location-button"
-            id="current-location-button"
-          >
+          <input type="submit" value="Search" class="search-button" />
+          <button class="current-location-button" id="current-location-button">
             Current location
           </button>
         </form>
@@ -46,35 +44,33 @@
 
       <div class="today card currently" style="width: 30rem">
         <div class="card-body currently">
-          <h1 class="card-title currently" id="current-location">
-            Tromsø, Norway
-          </h1>
-          <h6 class="card-subtitle mb-2 text-muted currently" id="date-zero">
-            January 22nd
-          </h6>
+          <h1 class="card-title currently" id="current-location"></h1>
+          <h6
+            class="card-subtitle mb-2 text-muted currently"
+            id="date-zero"
+          ></h6>
           <br />
           <div class="row">
             <div class="col-6">
-              <h4 class="card-text currently">
-                Current temperature
-                <br />
-                <br />
-                <span>
-                  <span class="current-degrees-emoji">🌧</span>
-                  <span class="current-degrees" id="current-degrees">3</span>
-                  <span class="celsius-fahrenheit">
-                    <a href="#" class="degree-unit" id="celsius">°C</a>
-                    |
-                    <a href="#" class="degree-unit" id="fahrenheit">°F</a>
-                  </span>
+              <h4 class="card-text, description" id="description"></h4>
+              <span class="icon-and-degrees">
+                <img src="" alt="" class="weather-icon" id="weather-icon" />
+                <span
+                  class="current-temperature"
+                  id="current-temperature"
+                ></span>
+                <span class="celsius-fahrenheit">
+                  <a href="#" class="temperature-unit" id="celsius">°C</a>
+                  |
+                  <a href="#" class="temperature-unit" id="fahrenheit">°F</a>
                 </span>
-              </h4>
+              </span>
             </div>
             <div class="col-6">
               <ul class="currently">
                 <li>Chance of rain: 86%</li>
-                <li>Humidity: 75%</li>
-                <li>Wind: 10 m/s</li>
+                <li>Humidity: <span id="humidity">75</span>%</li>
+                <li>Wind: <span id="wind-speed">10</span> km/h</li>
               </ul>
             </div>
           </div>
@@ -238,12 +234,15 @@
         </div>
       </div>
       <div class="open-source-code">
-        <a href="https://github.com/saraliva4/SheCodes-github-get-started">
+        <a
+          href="https://github.com/saraliva4/SheCodes-github-get-started"
+          target="_blank"
+        >
           Open-source code
         </a>
         by Sara Littauer
       </div>
-      <script src="src/index.js"></script>
     </div>
+    <script src="src/index.js"></script>
   </body>
 </html>

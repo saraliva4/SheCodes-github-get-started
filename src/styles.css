@@ -4,17 +4,29 @@ body {
 }
 div.search {
   text-align: center;
-  padding: 20px 10px;
+  margin: 0 auto;
+  padding: 10px 0px 10px 0px;
+  width: 30rem;
 }
 .search.search-icon {
   color: #128494;
 }
-.search.search-bar {
+.search.search-input {
   border-radius: 4px;
   padding: 5px 10px;
   border: 0.5px solid #128494;
+  box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.2);
 }
-.search.current-location-button {
+.search-button {
+  color: #128494;
+  border-radius: 4px;
+  transition: all 200ms ease-in-out;
+  padding: 5px 10px;
+  box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.2);
+  border: 1px solid #128494;
+  background-color: #fff;
+}
+.current-location-button {
   color: #fff;
   border-radius: 4px;
   transition: all 200ms ease-in-out;
@@ -42,10 +54,12 @@ h6.currently,
 h6.next-week {
   text-align: center;
 }
-h4.currently {
-  font-size: 20px;
+h4.description {
+  font-size: 22px;
   padding-top: 10px;
   font-weight: 400;
+  color: rgb(120, 120, 120);
+  text-transform: capitalize;
 }
 .card-subtitle {
   font-size: 15px;
@@ -54,26 +68,34 @@ h4.currently {
 .card.next-week {
   padding: 10px 0 0;
 }
-.current-degrees-emoji {
-  font-size: 50px;
-}
-.current-degrees {
+.icon-and-degrees {
   position: relative;
-  top: -10px;
-  font-size: 40px;
+  left: -20px;
+}
+.current-temperature {
+  position: relative;
+  left: -15px;
+  font-size: 37px;
   font-weight: 400;
 }
-.celsius-fahrenheit {
-  font-size: 13px;
+.weather-icon {
+  width: 80px;
   position: relative;
-  bottom: 30px;
-  color: #128494;
+  bottom: 5px;
 }
-a.degree-unit {
+.celsius-fahrenheit {
+  font-size: 11px;
+  position: relative;
+  bottom: 18px;
+  left: -10px;
+  color: #128494;
+  margin: 0%;
+}
+a.temperature-unit {
   text-decoration: none;
   color: black;
 }
-a.degree-unit:hover {
+a.temperature-unit:hover {
   text-decoration: underline;
   text-decoration-color: #00b7c2;
   color: #00b7c2;
@@ -85,7 +107,8 @@ ul.currently {
   position: relative;
   left: -8px;
   font-size: smaller;
-  padding: 30px 10px 30px 50px;
+  padding: 35px 10px 35px 50px;
+  margin-left: 0;
 }
 .currently.today-hours {
   font-weight: 200;
