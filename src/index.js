@@ -1,27 +1,55 @@
-let now = new Date();
-let weekDays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+function showHourlyForecast() {
+  let hourlyForecastElement = document.querySelector("#hourly-forecast");
+  let hourlyForecastHTML = `<div class="row">`;
+
+  weekDays.forEach(function (day) {
+    hourlyForecastHTML =
+      hourlyForecastHTML +
+      `
+    <div class="col-2 today-hours currently">
+    ${day}
+    <br />
+    <img
+    src=""
+    alt=""
+    width="42"
+    class="forecast-weather-icon"
+    id="forecast-weather-icon"
+    />
+    3°
+    </div>`;
+  });
+
+  hourlyForecastHTML = hourlyForecastHTML + `</div>`;
+  hourlyForecastElement.innerHTML = hourlyForecastHTML;
+}
+
+function showWeeklyForecast() {
+  let weeklyForecastElement = document.querySelector("#weekly-forecast");
+  let weeklyForecastHTML = `<div class="row">`;
+  weekDays.forEach(function (day) {
+    weeklyForecastHTML =
+      weeklyForecastHTML +
+      `<br />
+      <div class="monday next-week card" style="width: 30rem">
+        <div class="next-week card-body">
+          <h5 class="next-week card-title" id="weekday-one">Monday</h5>
+          <h6 class="next-week card-subtitle mb-2 text-muted" id="date-one">
+            January 23rd
+          </h6>
+        </div>
+        <div class="row">
+          <div class="col-6 next-week weather">
+            <span class="next-week weather-emoji">🌧</span>
+            <span class="next-week weather-forecast">Rain</span>
+          </div>
+          <div class="col-6 next-week temperature">4°/1°</div>
+        </div>
+      </div>`;
+
+    weeklyForecastElement.innerHTML = weeklyForecastHTML;
+  });
+}
 
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
@@ -52,6 +80,16 @@ function showTemperature(response) {
   iconElement.setAttribute("alt", `response.data.weather[0].description`);
 
   celsiusTemperature = response.data.main.temp;
+
+  let iconElementOne = document.querySelector("#hour-one-weather-icon");
+  iconElementOne.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElementOne.setAttribute("alt", `response.data.weather[0].description`);
+
+  showHourlyForecast();
+  showWeeklyForecast();
 }
 
 function searchLocation(city) {
@@ -110,6 +148,31 @@ function temperatureFahrenheit(event) {
   celsius.classList.remove("active");
   celsius.classList.add("inactive");
 }
+
+let now = new Date();
+let weekDays = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+let months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 let todayDate = document.querySelector("#date-zero");
 todayDate.innerHTML = `${weekDays[now.getDay()]}, ${
