@@ -31,9 +31,9 @@ function showWeeklyForecast() {
     weeklyForecastHTML =
       weeklyForecastHTML +
       `<br />
-      <div class="monday next-week card" style="width: 30rem">
-        <div class="next-week card-body">
-          <h5 class="next-week card-title" id="weekday-one">Monday</h5>
+      <div class="next-week-card card" style="width: 30rem">
+        <div class="next-week-card card-body">
+          <h5 class="next-week card-title" id="weekday-one">${day}</h5>
           <h6 class="next-week card-subtitle mb-2 text-muted" id="date-one">
             January 23rd
           </h6>
@@ -81,7 +81,7 @@ function showTemperature(response) {
 
   celsiusTemperature = response.data.main.temp;
 
-  let iconElementOne = document.querySelector("#hour-one-weather-icon");
+  let iconElementOne = document.querySelector("#weather-icon");
   iconElementOne.setAttribute(
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`

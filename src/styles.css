@@ -109,7 +109,6 @@ h4.description {
   text-decoration: none;
   cursor: default;
 }
-
 ul.currently {
   list-style: none;
   border-left: 2px solid #00b7c2;
@@ -121,6 +120,9 @@ ul.currently {
 }
 .currently.today-hours {
   font-weight: 200;
+}
+.next-week.card {
+  display: block;
 }
 .next-week.weather {
   text-align: center;
