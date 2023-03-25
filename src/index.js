@@ -1,3 +1,10 @@
+function getForecast(coordinates) {
+  let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
+  let unit = "metric";
+  let apiURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+  console.log(coordinates);
+  axios.get(apiURL).then(showWeeklyForecast);
+}
 function showHourlyForecast() {
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = `<div class="row">`;
@@ -24,7 +31,8 @@ function showHourlyForecast() {
   hourlyForecastElement.innerHTML = hourlyForecastHTML;
 }
 
-function showWeeklyForecast() {
+function showWeeklyForecast(response) {
+  console.log(response.data.daily);
   let weeklyForecastElement = document.querySelector("#weekly-forecast");
   let weeklyForecastHTML = `<div class="row">`;
   weekDays.forEach(function (day) {
@@ -44,8 +52,8 @@ function showWeeklyForecast() {
             <span class="next-week weather-forecast">Rain</span>
           </div>
           <div class="col-6 next-week temperature">4°/1°</div>
-        </div>
-      </div>`;
+          </div>
+          </div>`;
 
     weeklyForecastElement.innerHTML = weeklyForecastHTML;
   });
@@ -86,10 +94,10 @@ function showTemperature(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+
   iconElementOne.setAttribute("alt", `response.data.weather[0].description`);
 
-  showHourlyForecast();
-  showWeeklyForecast();
+  getForecast(response.data.coord);
 }
 
 function searchLocation(city) {
