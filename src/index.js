@@ -162,31 +162,6 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(showPositionFromButton);
 }
 
-function temperatureCelsius(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector(".current-temperature");
-
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-
-  fahrenheit.classList.remove("active");
-  fahrenheit.classList.add("inactive");
-  celsius.classList.remove("inactive");
-  celsius.classList.add("active");
-}
-
-function temperatureFahrenheit(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector(".current-temperature");
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-
-  fahrenheit.classList.remove("inactive");
-  fahrenheit.classList.add("active");
-  celsius.classList.remove("active");
-  celsius.classList.add("inactive");
-}
-
 let now = new Date();
 let weekDays = [
   "Sunday",
@@ -222,13 +197,5 @@ searchForm.addEventListener("submit", handleSubmit);
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
-
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", temperatureCelsius);
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", temperatureFahrenheit);
-
-let celsiusTemperature = null;
 
 searchLocation("longyearbyen");

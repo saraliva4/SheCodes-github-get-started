@@ -92,26 +92,8 @@ h6.next-week {
   position: relative;
   bottom: 18px;
   left: -10px;
-  color: #128494;
-  margin: 0%;
-}
-.inactive {
-  color: #00b7c2;
-  cursor: default;
-  text-decoration: none;
-}
-.inactive:hover {
-  text-decoration: underline;
-  text-decoration-color: #00b7c2;
-}
-
-.active {
-  text-decoration: none;
   color: black;
-}
-.active:hover {
-  text-decoration: none;
-  cursor: default;
+  margin: 0;
 }
 ul.currently {
   list-style: none;
