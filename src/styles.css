@@ -110,24 +110,19 @@ ul.currently {
 .next-week.card {
   display: block;
 }
-.next-week.weather {
+.next-week-weather {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 200;
+  text-transform: capitalize;
+  display: block;
+  margin: 0 auto;
+}
+.next-week-temperature {
   text-align: center;
   font-size: 18px;
   font-weight: 200;
-  position: relative;
-  top: -25px;
-}
-.next-week.temperature {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 200;
-}
-.next-week.weather-emoji {
-  font-size: 50px;
-}
-.next-week.weather-forecast {
-  position: relative;
-  top: -10px;
+  padding-top: 10px;
 }
 .open-source-code {
   text-align: center;

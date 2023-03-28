@@ -1,9 +1,8 @@
-function getForecast(coordinates) {
-  let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
-  let unit = "metric";
-  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
-  axios.get(apiURL).then(showWeeklyForecast);
-  axios.get(apiURL).then(showHourlyForecast);
+function formatCurrentDate() {
+  let todayDate = document.querySelector("#date-zero");
+  todayDate.innerHTML = `${weekDays[now.getDay()]}, ${
+    months[now.getMonth()]
+  } ${now.getDate()}`;
 }
 
 function formatDay(timestamp) {
@@ -13,7 +12,23 @@ function formatDay(timestamp) {
   return weekDays[day];
 }
 
+function getWeeklyForecast(coordinates) {
+  let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
+  let unit = "metric";
+  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+  axios.get(apiURL).then(showWeeklyForecast);
+}
+
+function getHourlyForecast(coordinates) {
+  let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
+  let unit = "metric";
+  let apiURL = `
+  https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+  axios.get(apiURL).then(showHourlyForecast);
+}
+
 function showHourlyForecast(response) {
+  console.log(response);
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = `<div class="row">`;
 
@@ -26,14 +41,14 @@ function showHourlyForecast(response) {
     ${day}
     <br />
     <div class="col-6 next-week weather">
-              <img class="next-week weather-emoji"
-              src="https://openweathermap.org/img/wn/${forecastHour.weather[0].icon}@2x.png"
-              alt=""
-              width="42"
-              class="forecast-weather-icon"
-              id="forecast-weather-icon"
-              />
-    3°
+      <img class="next-week weather-emoji"
+        src="https://openweathermap.org/img/wn/${forecastHour.weather[0].icon}@2x.png"
+        alt=""
+        width="42"
+        class="forecast-weather-icon"
+        id="forecast-weather-icon"
+      />
+      3°
     </div>`;
     }
   });
@@ -46,6 +61,7 @@ function showWeeklyForecast(response) {
   let forecast = response.data.daily;
   let weeklyForecastElement = document.querySelector("#weekly-forecast");
   let weeklyForecastHTML = `<div class="row">`;
+
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       weeklyForecastHTML =
@@ -53,26 +69,26 @@ function showWeeklyForecast(response) {
         `
       <div class="col-12 next-week-card card" style="width: 30rem">
         <div class="next-week-card card-body">
-          <h5 class="next-week card-title" id="weekday-one">${formatDay(
-            forecastDay.dt
-          )}</h5>
+          <h5 class="next-week card-title" id="weekday-one">${formatCurrentDate()}</h5>
           <h6 class="next-week card-subtitle mb-2 text-muted" id="date-one">
-            January 23rd
+            ${formatDay(forecastDay.dt)}
           </h6>
           <div class="row">
-            <div class="col-6 next-week weather">
-              <img class="next-week weather-emoji"
-              src="https://openweathermap.org/img/wn/${
-                forecastDay.weather[0].icon
-              }@2x.png"
-              alt=""
-              width="42"
-              class="forecast-weather-icon"
-              id="forecast-weather-icon"
-              />
-              <span class="next-week weather-forecast">Rain</span>
-              </div>
-            <div class="col-6 next-week temperature">
+          <div class="col-6 next-week-weather">
+          <div class="next-week weather-forecast">${
+            forecastDay.weather[0].description
+          }</div>
+          <img
+          src="https://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="42"
+          class="forecast-weather-icon"
+          id="forecast-weather-icon"
+          />
+            </div>
+            <div class="col-6 next-week-temperature">
             <span class ="max-temp"> <strong> ${Math.round(
               forecastDay.temp.max
             )}°</strong> </span> / <span class="min-temp">${Math.round(
@@ -127,7 +143,8 @@ function showTemperature(response) {
 
   iconElementOne.setAttribute("alt", `response.data.weather[0].description`);
 
-  getForecast(response.data.coord);
+  getWeeklyForecast(response.data.coord);
+  getHourlyForecast(response.data.coord);
 }
 
 function searchLocation(city) {
@@ -187,15 +204,11 @@ let months = [
   "December",
 ];
 
-let todayDate = document.querySelector("#date-zero");
-todayDate.innerHTML = `${weekDays[now.getDay()]}, ${
-  months[now.getMonth()]
-} ${now.getDate()}`;
-
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
+formatCurrentDate();
 searchLocation("longyearbyen");
