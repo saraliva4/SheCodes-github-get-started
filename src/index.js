@@ -1,8 +1,7 @@
 function getForecast(coordinates) {
   let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
   let unit = "metric";
-  let apiURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
-  console.log(coordinates);
+  let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
   axios.get(apiURL).then(showWeeklyForecast);
 }
 function showHourlyForecast() {
@@ -38,23 +37,24 @@ function showWeeklyForecast(response) {
   weekDays.forEach(function (day) {
     weeklyForecastHTML =
       weeklyForecastHTML +
-      `<br />
-      <div class="next-week-card card" style="width: 30rem">
+      `
+      <div class="col-12 next-week-card card" style="width: 30rem">
         <div class="next-week-card card-body">
           <h5 class="next-week card-title" id="weekday-one">${day}</h5>
           <h6 class="next-week card-subtitle mb-2 text-muted" id="date-one">
             January 23rd
           </h6>
+          <div class="row">
+            <div class="col-6 next-week weather">
+              <span class="next-week weather-emoji">🌧</span>
+              <span class="next-week weather-forecast">Rain</span>
+              </div>
+            <div class="col-6 next-week temperature">4°/1°</div>
+          </div>
         </div>
-        <div class="row">
-          <div class="col-6 next-week weather">
-            <span class="next-week weather-emoji">🌧</span>
-            <span class="next-week weather-forecast">Rain</span>
-          </div>
-          <div class="col-6 next-week temperature">4°/1°</div>
-          </div>
-          </div>`;
-
+        </div>
+         `;
+    weeklyForecastHTML = weeklyForecastHTML + `</div>`;
     weeklyForecastElement.innerHTML = weeklyForecastHTML;
   });
 }
