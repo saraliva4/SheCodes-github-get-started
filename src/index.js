@@ -18,36 +18,37 @@ function formatDay(timestamp) {
   return weekDays[day];
 }
 
-function getWeeklyForecast(coordinates) {
+function getForecast(coordinates) {
   let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
   let unit = "metric";
   let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
   axios.get(apiURL).then(showWeeklyForecast);
+  axios.get(apiURL).then(showHourlyForecast);
 }
 
 function showHourlyForecast(response) {
   console.log(response.data.hourly);
-  //let forecast = response;
+  let forecast = response.data.hourly;
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = `<div class="row">`;
 
-  weekDays.forEach(function (day, index) {
+  forecast.forEach(function (forecastHour, index) {
     if (index > 0 && index < 7) {
       hourlyForecastHTML =
         hourlyForecastHTML +
         `
     <div class="col-2 today-hours currently">
-    ${day}
+    ${forecastHour.dt}
     <br />
-    <div class="col-6 next-week weather">
       <img class="next-week weather-emoji"
-        src="https://openweathermap.org/img/wn/10d@2x.png"
+        src="https://openweathermap.org/img/wn/${
+          forecastHour.weather[0].icon
+        }@2x.png"
         alt=""
         width="42"
         class="forecast-weather-icon"
       />
-      3°
-      </div>
+      ${Math.round(forecastHour.temp)}°
       </div>`;
     }
   });
@@ -143,7 +144,7 @@ function showTemperature(response) {
 
   iconElementOne.setAttribute("alt", `response.data.weather[0].description`);
 
-  getWeeklyForecast(response.data.coord);
+  getForecast(response.data.coord);
 }
 
 function searchLocation(city) {
@@ -153,7 +154,6 @@ function searchLocation(city) {
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=${unit}`;
 
   axios.get(`${apiUrlCity}`).then(showTemperature);
-  axios.get(`${apiUrlCity}`).then(showHourlyForecast);
 }
 
 function handleSubmit(event) {
