@@ -1,8 +1,14 @@
-function formatCurrentDate() {
+function formatCurrentDate(timestamp) {
   let todayDate = document.querySelector("#date-zero");
   todayDate.innerHTML = `${weekDays[now.getDay()]}, ${
     months[now.getMonth()]
   } ${now.getDate()}`;
+  if (timestamp) {
+    let date = new Date(timestamp);
+    return `${weekDays[date.getDay()]}, ${
+      months[date.getMonth()]
+    } ${date.getDate()}`;
+  }
 }
 
 function formatDay(timestamp) {
@@ -19,21 +25,14 @@ function getWeeklyForecast(coordinates) {
   axios.get(apiURL).then(showWeeklyForecast);
 }
 
-function getHourlyForecast(coordinates) {
-  let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
-  let unit = "metric";
-  let apiURL = `
-  https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
-  axios.get(apiURL).then(showHourlyForecast);
-}
-
 function showHourlyForecast(response) {
-  console.log(response);
+  console.log(response.data.hourly);
+  //let forecast = response;
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = `<div class="row">`;
 
-  weekDays.forEach(function (forecastHour, index) {
-    if (index < 6) {
+  weekDays.forEach(function (day, index) {
+    if (index > 0 && index < 7) {
       hourlyForecastHTML =
         hourlyForecastHTML +
         `
@@ -42,14 +41,14 @@ function showHourlyForecast(response) {
     <br />
     <div class="col-6 next-week weather">
       <img class="next-week weather-emoji"
-        src="https://openweathermap.org/img/wn/${forecastHour.weather[0].icon}@2x.png"
+        src="https://openweathermap.org/img/wn/10d@2x.png"
         alt=""
         width="42"
         class="forecast-weather-icon"
-        id="forecast-weather-icon"
       />
       3°
-    </div>`;
+      </div>
+      </div>`;
     }
   });
 
@@ -63,14 +62,16 @@ function showWeeklyForecast(response) {
   let weeklyForecastHTML = `<div class="row">`;
 
   forecast.forEach(function (forecastDay, index) {
-    if (index < 6) {
+    if (index > 0 && index < 7) {
       weeklyForecastHTML =
         weeklyForecastHTML +
         `
       <div class="col-12 next-week-card card" style="width: 30rem">
         <div class="next-week-card card-body">
-          <h5 class="next-week card-title" id="weekday-one">${formatCurrentDate()}</h5>
-          <h6 class="next-week card-subtitle mb-2 text-muted" id="date-one">
+          <h5 class="next-week card-title">${formatCurrentDate(
+            forecastDay.dt * 1000
+          )}</h5>
+          <h6 class="next-week card-subtitle mb-2 text-muted">
             ${formatDay(forecastDay.dt)}
           </h6>
           <div class="row">
@@ -85,7 +86,6 @@ function showWeeklyForecast(response) {
           alt=""
           width="42"
           class="forecast-weather-icon"
-          id="forecast-weather-icon"
           />
             </div>
             <div class="col-6 next-week-temperature">
@@ -144,7 +144,6 @@ function showTemperature(response) {
   iconElementOne.setAttribute("alt", `response.data.weather[0].description`);
 
   getWeeklyForecast(response.data.coord);
-  getHourlyForecast(response.data.coord);
 }
 
 function searchLocation(city) {
@@ -154,6 +153,7 @@ function searchLocation(city) {
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=${unit}`;
 
   axios.get(`${apiUrlCity}`).then(showTemperature);
+  axios.get(`${apiUrlCity}`).then(showHourlyForecast);
 }
 
 function handleSubmit(event) {
