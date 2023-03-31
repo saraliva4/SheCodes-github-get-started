@@ -18,6 +18,13 @@ function formatDay(timestamp) {
   return weekDays[day];
 }
 
+function formatHour(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hour = date.getHours();
+
+  return hours[hour];
+}
+
 function getForecast(coordinates) {
   let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
   let unit = "metric";
@@ -38,7 +45,7 @@ function showHourlyForecast(response) {
         hourlyForecastHTML +
         `
     <div class="col-2 today-hours currently">
-    ${forecastHour.dt}
+    ${formatHour(forecastHour.dt)}
     <br />
       <img class="next-week weather-emoji"
         src="https://openweathermap.org/img/wn/${
@@ -48,6 +55,7 @@ function showHourlyForecast(response) {
         width="42"
         class="forecast-weather-icon"
       />
+    <br />
       ${Math.round(forecastHour.temp)}°
       </div>`;
     }
@@ -202,6 +210,32 @@ let months = [
   "October",
   "November",
   "December",
+];
+let hours = [
+  "00:00",
+  "01:00",
+  "02:00",
+  "03:00",
+  "04:00",
+  "05:00",
+  "06:00",
+  "07:00",
+  "08:00",
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+  "21:00",
+  "22:00",
+  "23:00",
 ];
 
 let searchForm = document.querySelector("#search-form");
