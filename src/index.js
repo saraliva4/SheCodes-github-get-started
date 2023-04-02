@@ -5,9 +5,7 @@ function formatCurrentDate(timestamp) {
   } ${now.getDate()}`;
   if (timestamp) {
     let date = new Date(timestamp);
-    return `${weekDays[date.getDay()]}, ${
-      months[date.getMonth()]
-    } ${date.getDate()}`;
+    return `${months[date.getMonth()]} ${date.getDate()}`;
   }
 }
 
