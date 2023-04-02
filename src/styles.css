@@ -9,6 +9,10 @@ div.search {
   width: 30rem;
   margin-top: 60px;
 }
+.search-bar {
+  z-index: 1000;
+  top: 0;
+}
 .search.search-icon {
   color: #128494;
 }
@@ -46,6 +50,9 @@ div.search {
   margin-bottom: 30px;
   padding: 20px 15px 20px;
   border: 1px solid #128494;
+}
+.card.currently {
+  margin-top: 60px;
 }
 .card.sunday {
   margin-bottom: 20px;

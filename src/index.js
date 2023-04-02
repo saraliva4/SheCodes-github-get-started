@@ -85,7 +85,7 @@ function showWeeklyForecast(response) {
           </h6>
           <div class="row">
           <div class="col-6 next-week-weather">
-          <div class="next-week weather-forecast">${
+          <div class="next-week-weather-desription">${
             forecastDay.weather[0].description
           }</div>
           <img
@@ -93,8 +93,8 @@ function showWeeklyForecast(response) {
             forecastDay.weather[0].icon
           }@2x.png"
           alt=""
-          width="42"
-          class="forecast-weather-icon"
+          width="60"
+          class="weekly-forecast-weather-icon"
           />
             </div>
             <div class="col-6 next-week-temperature">
